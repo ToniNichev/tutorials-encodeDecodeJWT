@@ -1,6 +1,8 @@
 import jwt from "./jwt-services.js";
+// import jwt from "./jwt-services-no-key.js";
 
 const now = Math.round(new Date().getTime() / 1000);
+const secret = "12345";
 
 const signData = {
     issuer: 'Toni Nichev',
@@ -20,12 +22,12 @@ const payload = {
 };
 
 
-const token = await jwt.sign(signData, payload);
+const token = await jwt.sign(signData, payload, secret);
 console.log(`\n==================\nSIGN JWT\n==================\n ${token}`);
 
 
 
-const v = await jwt.verify(token, signData);
+const v = await jwt.verify(token, signData, secret);
 console.log(`\n==================\nVERIFY SIGNATURE\n==================\n`, v);
 
 
