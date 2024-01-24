@@ -1,5 +1,5 @@
-import jwt from "./jwt-services.js";
-// import jwt from "./jwt-services-no-key.js";
+import jwt from "./jwt-services-asymmetric.js";
+// import jwt from "./jwt-services-symmetric.js";
 
 const now = Math.round(new Date().getTime() / 1000);
 const secret = "12345";
