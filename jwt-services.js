@@ -4,30 +4,16 @@ import fs from "fs";
 const now = Math.round(new Date().getTime() / 1000);
 const expirationTime = now + 500; // Set to 15 minutes (900 seconds)
 
-const signData = {
-  issuer: 'Toni Nichev',
-  subject: 'toni.nichev@gmail.com',
-  audience: 'https://mysoftware-corp.com',
-  expiresIn: "12h",
-  algorithm: "RS256"
-}
 const privateKey = fs.readFileSync('./keys/private_key.pem');
 const publicKey = fs.readFileSync('./keys/public_key.pem');
 
-const sign = async () => {
+const sign = async (signData, payload) => {
   // Create the JWT header and payload
   const header = {
     'alg': 'RS256',
     'typ': 'JWT'
   };
 
-  const payload = {
-    "author": "Toni Y Nichev",
-    "iat": now,
-    // "exp": expirationTime,
-    "data": "Test is successfull!",
-    //"iss": "ToniNichev"
-  };
 
   // SIGNING OPTIONS
   const signOptions = {
@@ -43,7 +29,7 @@ const sign = async () => {
   return token;
 }
 
-const verify = async (token) => {
+const verify = async (token, signData) => {
   // VERIFY OPTIONS
   const verifyOptions = {
     issuer: signData.issuer,
