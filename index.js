@@ -1,5 +1,5 @@
 import jwt from "./jwt-services-asymmetric.js";
-// import jwt from "./jwt-services-symmetric.js";
+//import jwt from "./jwt-services-symmetric.js";
 
 const now = Math.round(new Date().getTime() / 1000);
 const secret = "12345";
@@ -22,12 +22,12 @@ const payload = {
 };
 
 
-const token = await jwt.sign(signData, payload, secret);
+const token = await jwt.sign(signData, payload);
 console.log(`\n==================\nSIGN JWT\n==================\n ${token}`);
 
 
 
-const v = await jwt.verify(token, signData, secret);
+const v = await jwt.verify(token, signData);
 console.log(`\n==================\nVERIFY SIGNATURE\n==================\n`, v);
 
 

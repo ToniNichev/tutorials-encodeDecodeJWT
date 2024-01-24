@@ -4,8 +4,9 @@ import fs from "fs";
 const now = Math.round(new Date().getTime() / 1000);
 const expirationTime = now + 500; // Set to 15 minutes (900 seconds)
 
+const secret = 'itsasecret123';
 
-const sign = async (signData, payload, secret) => {
+const sign = async (signData, payload) => {
   // Create the JWT header and payload
   const header = {
     'alg': 'RS256',
@@ -17,7 +18,7 @@ const sign = async (signData, payload, secret) => {
   return token;
 }
 
-const verify = async (token, signData, secret) => {
+const verify = async (token, signData) => {
 
   try {
     return jwt.verify(token, secret);
